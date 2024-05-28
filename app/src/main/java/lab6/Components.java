@@ -5,9 +5,51 @@
  * 5/28/2024
  */
 package lab6;
+import java.io.File;
+import java.util.Scanner;
 
 public class Components {
     public static void main(String[] args) {
-        System.out.println("Hello World");
-    }
+        File file = new File(args[0]);
+        Scanner sc = new Scanner(file);
+        //Takes the first line of the file and converts it into a Intiger of the #vertecis
+        int vertecis = sc.nextInt();
+        matrixGraph mGraph = new matrixGraph(vertecis);
+
+        while(sc.hasNextLine()) {
+            int i = sc.nextInt();
+            int j = sc.nextInt();
+            mGraph.addConnection(i,j);
+            //Consume the remainder of the Line
+            sc.nextLine(); 
+        }
+        sc.close();
+    } 
+    public class matrixGraph {
+        private boolean [][] adjacencyMatrix;
+        private int vertecis;
+    
+        public matrixGraph(int numVertecis) {
+            this.vertecis = numVertecis;
+            adjacencyMatrix = new boolean[numVertecis][numVertecis];
+        }
+        public void addConnection(int i, int j) {
+            adjacencyMatrix[i][j] = true;
+            //Since the connections dont have direction we set bolth to true
+            adjacencyMatrix[j][i] = true;
+        }
+        public void removeConnection(int i, int j) {
+            adjacencyMatrix[i][j] = false;
+            adjacencyMatrix[j][i] = false;
+        }
+        public boolean hasConnection(int i, int j) {
+            return adjacencyMatrix[i][j];
+        } 
+    
+        public int numComponents() {
+            //TODO :Some kind of BFS through a 2d Array
+        }
+    }     
 }
+
+
