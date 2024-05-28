@@ -8,6 +8,6 @@ package lab6;
 
 public class Components {
     public static void main(String[] args) {
-        
+        System.out.println("Hello World");
     }
 }
